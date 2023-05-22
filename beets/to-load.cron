@@ -1,0 +1,8 @@
+# do daily/weekly/monthly maintenance
+# min   hour    day     month   weekday command
+24       2       *       *       1       nice beet fetchart
+24       3       *       *       *       nice beet splupdate
+24       2       *       *       2       date >> /config/automation.log;echo "beet move" >> /config/automation.log;nice beet move >> /config/automation.log; date >> /config/automation.log;
+24       2       *       *       3       date >> /config/automation.log;echo "beet update" >> /config/automation.log;nice beet update >> /config/automation.log; date >> /config/automation.log;
+24       1       *       *       *       date >> /downloads/beets-ingest/activity.log; beet import -piqm -l /downloads/beets-ingest/import.log /downloads/beets-ingest/ >> /downloads/beets-ingest/activity.log; beet move >> /config/automation.log; date >> /downloads/beets-ingest/activity.log;
+*/5      *       *       *       *       date > /tmp/cron-running
