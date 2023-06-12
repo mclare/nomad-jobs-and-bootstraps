@@ -51,7 +51,7 @@ job "beets-service" {
       image = "linuxserver/beets"
       ports = ["http"]
       command = "sh"
-      args = ["-c", "crontab /config/to-load.cron; while true; do date; sleep 360; done;"]
+      args = ["-c", "crontab /config/to-load.cron; crond; while true; do date; sleep 360; done;"]
     }
     resources {
         cpu    = 200
