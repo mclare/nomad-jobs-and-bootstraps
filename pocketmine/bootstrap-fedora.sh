@@ -3,27 +3,23 @@ date
 echo " ----- Adding packages ----- "
 dnf update -y
 dnf install nano screen wget rsync cronie -y
-dnf install autoconf automake m4 bzip2 bison g++ git cmake re2c libtool perl openssl-devel -y
-
+dnf install autoconf automake m4 bzip2 bison g++ git cmake re2c libtool perl openssl-devel xz -y
 date
+
 mkdir -p /opt/pocketmine
 cd /opt/pocketmine
 
-echo " ----- Fetching and install PHP ----- " 
-wget https://raw.githubusercontent.com/pmmp/PHP-Binaries/php/8.0/compile.sh
-chmod +x compile.sh 
-./compile.sh -j 4
+echo " ----- Installing/updating to the latest version ofPHP ----- " 
+wget -O installer.sh https://get.pmmp.io
+chmod +x installer.sh
+./installer.sh -r
 
 echo " ----- Fetching latest PocketMineMP ----- "
-wget https://github.com/pmmp/PocketMine-MP/releases/latest/download/PocketMine-MP.phar
-
-mv latest PocketMine-MP.phar
+wget -O PocketMine-MP.phar https://github.com/pmmp/PocketMine-MP/releases/latest/download/PocketMine-MP.phar
 
 echo " ----- Fetching latest PocketMineMP start script----- "
 wget https://github.com/pmmp/PocketMine-MP/releases/latest/download/start.sh
 chmod +x start.sh
-
-echo " ----- If we made it this far, then it must be working! Woooohooooo! Wow! ----- "
 date
 
 echo " ----- Copying game data to node ----- "
