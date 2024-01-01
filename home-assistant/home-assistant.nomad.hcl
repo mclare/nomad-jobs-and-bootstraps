@@ -7,10 +7,10 @@ job "home-assistant" {
   datacenters = ["dc1"]
   type        = "service"
   
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "pi4B-01"
-  }
+constraint {
+  attribute = "${attr.unique.network.ip-address}"
+  value     = "192.168.40.11"
+}
 
   group "home-assistant" {
       volume "vol-cam" {
