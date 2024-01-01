@@ -16,6 +16,15 @@ job "folding-3" {
     }
 
     task "folding-at-home" {
+
+// Add constraint to ensure total CPU is over 6000
+    constraint {
+      attribute = "${attr.cpu.totalcompute}"
+      operator  = ">"
+      value     = "6000"
+    }
+
+
       driver = "docker"
 
       volume_mount {
@@ -30,8 +39,8 @@ job "folding-3" {
       }
 
       env { /* This image doesn't use these, but good to have around */
-	      FOLD_USER = "Matt_Clare"
-	      FOLD_TEAM = "47936"
+	FOLD_USER = "Matt_Clare"
+	FOLD_TEAM = "47936"
         FOLD_ANON = "false"
         FOLD_ALLOW_IP = "192.168.10.1/14"
         POWER = "light"
