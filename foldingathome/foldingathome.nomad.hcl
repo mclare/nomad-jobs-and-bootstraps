@@ -39,8 +39,8 @@ job "folding-3" {
       }
 
       env { /* This image doesn't use these, but good to have around */
-	FOLD_USER = "Matt_Clare"
-	FOLD_TEAM = "47936"
+		FOLD_USER = "Matt_Clare"
+		FOLD_TEAM = "47936"
         FOLD_ANON = "false"
         FOLD_ALLOW_IP = "192.168.10.1/14"
         POWER = "light"

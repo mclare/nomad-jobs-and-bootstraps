@@ -7,22 +7,12 @@ job "home-assistant" {
   datacenters = ["dc1"]
   type        = "service"
   
-constraint {
-  attribute = "${attr.unique.network.ip-address}"
-  value     = "192.168.40.11"
-}
+  constraint {
+    attribute = "${attr.unique.network.ip-address}"
+    value     = "192.168.40.11"
+  }
 
   group "home-assistant" {
-      volume "vol-cam" {
-        type      = "host"
-        read_only = false
-        source    = "cam"
-      } 
-      volume "vol-home-assistant" {
-        type      = "host"
-        read_only = false
-        source    = "home-assistant"
-      }
 	
 	  network {
 	      port "http" { 
@@ -31,28 +21,20 @@ constraint {
 	  }
 	  
     count = 1
-    task "home-assistant" {
+    task "home-assistant-volumes" {
       driver = "docker"
 
-    volume_mount {
-      volume      = "vol-home-assistant"
-	    destination = "/config"
-	    read_only   = false
-    }
-    volume_mount {
-      volume      = "vol-cam"
-      destination = "/downloads"
-      read_only = false
-    }
 	
     config {
       image = "ghcr.io/home-assistant/home-assistant:stable"
       ports = ["http"]
+      volumes  = ["/media/cluster/common/home-assistant/:/config/"] #Nomad client must have docker.volumes.enabled = true https://developer.hashicorp.com/nomad/docs/drivers/docker#client-requirements
+
 
     }
     resources {
-      cpu    = 2500
-      memory = 2500
+      cpu    = 3000
+      memory = 3000
     }
 
     }

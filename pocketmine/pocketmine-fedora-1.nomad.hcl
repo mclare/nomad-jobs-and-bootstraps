@@ -1,4 +1,4 @@
-job "pocket-mine-fedora-2" {
+job "pocket-mine" {
   datacenters = ["dc1"]
   type        = "service"
 
@@ -51,7 +51,7 @@ constraint {
         /* The script ends running the pocketmine server and then runs a loop to keep the container
          running incase you want to restart the server without the whole container
          */
-        args = ["-c", "/config/pocketmine-mp/bootstrap-fedora.sh;while true; do date; sleep 30; done;"]
+        args = ["-c", "/config/pocketmine-mp/bootstrap-fedora.sh;while true; do date; sleep 360; done;"]
       }
       resources {
         cpu    = 2500

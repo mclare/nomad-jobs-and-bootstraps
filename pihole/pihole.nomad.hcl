@@ -11,8 +11,8 @@ job "pihole" {
   type = "service"
 
   constraint {
-    attribute = "${attr.unique.hostname}"
-	value     = "pi4B-02"
+    attribute = "${attr.unique.network.ip-address}"
+    value     = "192.168.40.12"
   }
 
   group "pihole-Group" {
