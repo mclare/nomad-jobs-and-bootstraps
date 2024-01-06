@@ -31,12 +31,12 @@ job "www-app" {
     config {
       image = "php:7.2-apache"
       ports = ["http"]
-      volumes  = ["/media/cluster/www/:/var/www/html/"] #Nomad client must have docker.volumes.enabled = true https://developer.hashicorp.com/nomad/docs/drivers/docker#client-requirements
+      volumes  = ["/media/cluster/www/:/var/www/html/","/media/cluster/config/apache/php-development/:/usr/local/etc/php/"] #Nomad client must have docker.volumes.enabled = true https://developer.hashicorp.com/nomad/docs/drivers/docker#client-requirements
 
     }
     resources {
       cpu    = 900
-      memory = 300
+      memory = 500
     }
 
     }
