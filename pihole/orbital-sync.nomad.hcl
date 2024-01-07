@@ -26,8 +26,7 @@ job "pihole-orbital-sync" {
         PRIMARY_HOST_PASSWORD = "<password>"
         SECONDARY_HOST_1_BASE_URL = "http://192.168.40.12:8053/"
         SECONDARY_HOST_1_PASSWORD = "<password>"
-        INTERVAL_MINUTES = "30"
-
+        INTERVAL_MINUTES = "90"
       }
 
       volume_mount {
@@ -38,7 +37,6 @@ job "pihole-orbital-sync" {
       
       config {
 		  image = "mattwebbio/orbital-sync:1"
-		  #volumes  = ["/media/cluster/config/pihole/orbital-sync/:/etc/orbital-sync/"] #Nomad client must have docker.volumes.enabled = true https://developer.hashicorp.com/nomad/docs/drivers/docker#client-requirements
       }
 
     }

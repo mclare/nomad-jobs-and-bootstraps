@@ -1,11 +1,12 @@
 /*
-Based on
+Created based on the following:
 https://github.com/pi-hole/docker-pi-hole#readme
+
 */
 
 job "pihole" {
   datacenters = ["dc1"]
-  type = "service"
+  type = "system"
 
   constraint {
     attribute = "${attr.unique.network.ip-address}"
@@ -17,26 +18,23 @@ job "pihole" {
       network {
 		port "dns" {
 		  static = 53
+		  to = 53
 		}
 		port "dns-IOT" {
 		  static = 53
+		  to = 53
 		  host_network = "IOT"
 		}
 		port "dns-kids" {
 		  static = 53
+		  to = 53
 		  host_network = "kids"
 		}
 		port "http" {
-                  static = 8053
+		  static = 8053
 		  to = 80
 		}
       }
-
-    volume "vol-config" {
-      type      = "host"
-      read_only = false
-      source    = "config"
-    }
 	
     task "pihole-Server" {
       driver = "docker"
@@ -52,12 +50,6 @@ job "pihole" {
 		PIHOLE_BASE = "/config/pihole/pihole-storage"
 		BLOCK_ICLOUD_PR = "false"
 		VIRTUAL_HOST = "${NOMAD_IP_client}"
-      }
-
-      volume_mount {
-		   volume      = "vol-config"
-		   destination = "/config"
-		   read_only   = false
       }
       
       config {
