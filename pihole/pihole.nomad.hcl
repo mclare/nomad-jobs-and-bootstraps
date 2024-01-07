@@ -1,9 +1,6 @@
 /*
-Created Saturday June 18, 2022
+Based on
 https://github.com/pi-hole/docker-pi-hole#readme
-
-Reliese on persistent storage at /media/cluster/config/pihole/ - Using docker.volumes.enabled = true
-This instance serves 4 VLAN networks: LAN, IOT, kids, and the rest of the world from a specific Nomad noade (pi4B-02)
 */
 
 job "pihole" {
@@ -29,8 +26,8 @@ job "pihole" {
 		  static = 53
 		  host_network = "kids"
 		}
-		
 		port "http" {
+                  static = 8053
 		  to = 80
 		}
       }
