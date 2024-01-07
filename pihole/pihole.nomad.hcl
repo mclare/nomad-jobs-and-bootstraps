@@ -21,10 +21,6 @@ job "pihole" {
 		port "dns" {
 		  static = 53
 		}
-		port "dns-LAN" {
-		  static = 53
-		  host_network = "LAN"
-		}
 		port "dns-IOT" {
 		  static = 53
 		  host_network = "IOT"
@@ -36,10 +32,6 @@ job "pihole" {
 		
 		port "http" {
 		  to = 80
-		}
-		port "http-2" {
-		  to = 80
-		  host_network = "LAN"
 		}
       }
 
@@ -73,7 +65,7 @@ job "pihole" {
       
       config {
 		  image = "pihole/pihole"
-	      ports = ["dns","dns-LAN","dns-IOT","dns-kids","http","http-2"]
+	      ports = ["dns","dns-IOT","dns-kids","http"]
 		  volumes  = ["/media/cluster/config/pihole/docker/pihole/:/etc/pihole/","/media/cluster/config/pihole/docker/dnsmasq.d/:/etc/dnsmasq.d/"] #Nomad client must have docker.volumes.enabled = true https://developer.hashicorp.com/nomad/docs/drivers/docker#client-requirements
 		  cap_add = ["net_admin", "setfcap"]
       }
