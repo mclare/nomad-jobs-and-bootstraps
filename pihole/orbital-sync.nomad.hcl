@@ -10,12 +10,6 @@ job "pihole-orbital-sync" {
   type = "service"
 
   group "pihole-Group" {
-
-    volume "vol-config" {
-      type      = "host"
-      read_only = false
-      source    = "config"
-    }
 	
     task "orbital-sync" {
       driver = "docker"
@@ -27,12 +21,6 @@ job "pihole-orbital-sync" {
         SECONDARY_HOST_1_BASE_URL = "http://192.168.40.12:8053/"
         SECONDARY_HOST_1_PASSWORD = "<password>"
         INTERVAL_MINUTES = "90"
-      }
-
-      volume_mount {
-		   volume      = "vol-config"
-		   destination = "/config"
-		   read_only   = false
       }
       
       config {
