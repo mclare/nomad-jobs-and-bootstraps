@@ -1,8 +1,6 @@
 /*
 Created Sunday January 7, 2024
 https://github.com/mattwebbio/orbital-sync
-
-Reliese on persistent storage at /media/cluster/config/pihole/ - Using docker.volumes.enabled = true
 */
 
 job "pihole-orbital-sync" {
