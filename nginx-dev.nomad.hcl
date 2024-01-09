@@ -1,4 +1,4 @@
-job "www-app" {
+job "www-nginx-dev" {
   datacenters = ["dc1"]
   type        = "service"
  /* 
@@ -8,7 +8,7 @@ job "www-app" {
   }
 */
 
-  group "www-unit" {
+  group "www" {
 	
 	  network {
 	      port "http" { 
@@ -18,15 +18,13 @@ job "www-app" {
 	  }
 
     count = 1
-    task "nginx" {
+    task "nginx-dev" {
       driver = "docker"
 
 	  env {
 	    TZ = "America/Toronto"
-
-		VIRTUAL_HOST = "${NOMAD_IP_client}"
+      VIRTUAL_HOST = "${NOMAD_IP_client}"
       }
-
 
     config {
       image = "nginx:latest"
