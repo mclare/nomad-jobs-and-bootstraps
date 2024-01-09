@@ -4,4 +4,5 @@
 **/._.DS_Store
 secret*
 ._*
-nginx/nginx-prod.nomad.hcl
+www/nginx-prod.nomad.hcl
+www/swag.nomad.hcl
