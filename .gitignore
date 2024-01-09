@@ -4,4 +4,4 @@
 **/._.DS_Store
 secret*
 ._*
-nginx-prod.nomad.hcl
+nginx/nginx-prod.nomad.hcl
