@@ -4,7 +4,7 @@ job "pocket-mine" {
 
 constraint {
   attribute = "${attr.unique.network.ip-address}"
-  value     = "192.168.40.11"
+  value     = "192.168.40.12"
 }
 
   group "pocket-mine" {
