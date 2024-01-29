@@ -6,7 +6,7 @@ https://github.com/pi-hole/docker-pi-hole#readme
 
 job "pihole" {
   datacenters = ["dc1"]
-  type = "system"
+  type = "service"
 
   constraint {
     attribute = "${attr.unique.network.ip-address}"

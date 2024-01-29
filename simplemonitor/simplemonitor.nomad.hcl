@@ -1,4 +1,4 @@
-job "python-simplemonitor-v2" {
+job "python-simplemonitor" {
   datacenters = ["dc1"]
   type        = "service"
 
@@ -7,7 +7,7 @@ job "python-simplemonitor-v2" {
 	  value     = "clustercontrol"
   }
 
-  group "python-simplemonitor-v2" {
+  group "python-simplemonitor" {
 	
     volume "vol-config" {
       type      = "host"
@@ -20,7 +20,7 @@ job "python-simplemonitor-v2" {
       source    = "www"
     }
 	
-    task "python-simplemonitor-v2.1" {
+    task "python-simplemonitor" {
       driver = "docker"
 
       volume_mount {
@@ -51,7 +51,7 @@ job "python-simplemonitor-v2" {
       }
       resources {
         cpu    = 500
-	    memory = 200
+	    memory = 256
       }
 
     }
