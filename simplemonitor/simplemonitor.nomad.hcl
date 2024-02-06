@@ -9,49 +9,23 @@ job "python-simplemonitor" {
 
   group "python-simplemonitor" {
 	
-    volume "vol-config" {
-      type      = "host"
-      read_only = false
-      source    = "config"
-    }
-    volume "vol-www" {
-      type      = "host"
-      read_only = false
-      source    = "www"
-    }
-	
     task "python-simplemonitor" {
       driver = "docker"
-
-      volume_mount {
-        volume      = "vol-config"
-        destination = "/config"
-        read_only   = true
-      }
-      volume_mount {
-        volume      = "vol-www"
-        destination = "/www"
-        read_only = false
-      }
       
       config {
         image = "python"
         privileged = true
         interactive = true
+
+        volumes  = ["/media/cluster/common/home-assistant/www/monitor:/www/","/media/cluster/config/simplemonitor:/config/"] #Nomad client must have docker.volumes.enabled = true https://developer.hashicorp.com/nomad/docs/drivers/docker#client-requirements
+
         command = "sh"
-        args = ["-c", "/config/simplemonitor/bootstrap.sh;"]
+        args = ["-c", "/config/bootstrap.sh;"]
       }
 
-      check {
-        type     = "http"
-        path     = "/"
-        interval = "10s"
-        timeout  = "2s"
-        retries  = 3
-      }
       resources {
         cpu    = 500
-	    memory = 256
+	      memory = 256
       }
 
     }
