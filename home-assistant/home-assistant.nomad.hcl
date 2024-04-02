@@ -26,14 +26,14 @@ job "home-assistant" {
 
 	
     config {
-      image = "ghcr.io/home-assistant/home-assistant:stable"
+      image = "ghcr.io/home-assistant/home-assistant"
       ports = ["http"]
       volumes  = ["/media/cluster/common/home-assistant/:/config/"] #Nomad client must have docker.volumes.enabled = true https://developer.hashicorp.com/nomad/docs/drivers/docker#client-requirements
 
 
     }
     resources {
-      cpu    = 3000
+      cpu    = 2500
       memory = 3000
     }
 
