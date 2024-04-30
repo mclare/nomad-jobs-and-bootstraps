@@ -14,12 +14,12 @@ snapshots=0
 
 # Function to capture a snapshot from the camera
 capture_snapshot() {
-    if ffmpeg -nostdin -y -i "$source" -f image2 -s 640x480 -vframes 1 "$output_file"; then
+    if ffmpeg -nostdin -y -i "$source" -f image2 -vframes 1 "$output_file"; then
         snapshots=$((snapshots + 1))
         echo "Snapshot $snapshots captured: $output_file"
 		echo "seconds_until_end_of_hour: $seconds_until_end_of_hour - sleep_time: $sleep_time"
     else
-        echo "Failed to capture snapshot."
+        echo "Failed to capture snapshot $snapshots."
     fi
 }
 

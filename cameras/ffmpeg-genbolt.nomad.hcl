@@ -41,7 +41,7 @@ group "ffmpeg-genbolt-raw" {
 
       env {
         SOURCE = "rtsp://@192.168.30.112:554/11"
-        DEVICE = "genbolt"
+        DEVICE = "garage"
         EXTRA_TIME = "60"
         EXTRA_TIME_HUNG = "360"
         DIR = "/media/srv/videos/cam/"
@@ -65,7 +65,7 @@ group "ffmpeg-genbolt-raw" {
 
       env {
         SOURCE = "rtsp://@192.168.30.112:554/11"
-        DEVICE = "genbolt"
+        DEVICE = "garage"
         SLEEP_TIME = "15"
       }
   }
