@@ -2,20 +2,14 @@ job "pi-temp-monitor" {
   datacenters = ["dc1"]
   type = "batch"
   constraint {
-    attribute = "${attr.kernel.name}"
-    value = "linux"
-  }
-  constraint {
     attribute    = "${meta.pi}"
     set_contains = "true"
   }
-  periodic {
-      cron = "*/10 * * * *"
-    }
   
-  spread {
-	    attribute = "${attr.dc}"
-	  }
+  periodic {
+    cron = "*/10 * * * *"
+  }
+
   group "monitor" {
     count = 4
 
@@ -32,8 +26,10 @@ job "pi-temp-monitor" {
         cpu    = 100 # 100 MHz
         memory = 64  # 64 MB
       } 
-	  
-	  
+    }
+    
+    spread {
+      attribute = "${attr.unique.hostname}"
     }
   }
 }
