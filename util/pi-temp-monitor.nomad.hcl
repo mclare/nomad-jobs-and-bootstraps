@@ -17,7 +17,7 @@ job "pi-temp-monitor" {
 	    attribute = "${attr.dc}"
 	  }
   group "monitor" {
-    count = 3
+    count = 4
 
     task "pi-temp" {
       driver = "raw_exec"
