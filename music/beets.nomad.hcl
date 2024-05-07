@@ -1,3 +1,4 @@
+# More info at https://docs.linuxserver.io/images/docker-beets/#supported-architectures
 job "beets-service" {
   datacenters = ["dc1"]
   type        = "service"
