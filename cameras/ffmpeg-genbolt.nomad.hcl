@@ -35,7 +35,7 @@ group "ffmpeg-genbolt-raw" {
 		
       }
       resources {
-        cpu    = 3000
+        cpu    = 4000
         memory = 1024
       }
 
