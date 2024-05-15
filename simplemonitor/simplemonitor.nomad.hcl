@@ -2,11 +2,6 @@ job "python-simplemonitor" {
   datacenters = ["dc1"]
   type        = "service"
 
-  constraint {
-    attribute = "${attr.unique.hostname}"
-	  value     = "clustercontrol"
-  }
-
   group "python-simplemonitor" {
 	
     task "python-simplemonitor" {
@@ -24,8 +19,8 @@ job "python-simplemonitor" {
       }
 
       resources {
-        cpu    = 500
-	      memory = 256
+        cpu    = 900
+	      memory = 512
       }
 
     }

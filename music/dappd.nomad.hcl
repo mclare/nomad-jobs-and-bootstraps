@@ -8,6 +8,7 @@ job "daapd-service" {
 	    port "dappd" { 
 			  static = 3689
 		  }
+      mode = "host"
 	  }
 	  
     count = 1
