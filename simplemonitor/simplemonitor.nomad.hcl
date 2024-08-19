@@ -2,13 +2,18 @@ job "python-simplemonitor" {
   datacenters = ["dc1"]
   type        = "service"
 
+    constraint {
+    attribute = "${attr.unique.network.ip-address}"
+    value     = "192.168.40.10"
+  }
+
   group "python-simplemonitor" {
 	
     task "python-simplemonitor" {
       driver = "docker"
       
       config {
-        image = "python"
+        image = "python:3.8"
         privileged = true
         interactive = true
 
@@ -20,7 +25,7 @@ job "python-simplemonitor" {
 
       resources {
         cpu    = 900
-	      memory = 512
+	      memory = 256
       }
 
     }
