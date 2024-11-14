@@ -35,8 +35,8 @@ group "ffmpeg-genbolt-raw" {
 		
       }
       resources {
-        cpu    = 4000
-        memory = 1024
+        cpu    = 3600
+        memory = 1400
       }
 
       env {
@@ -59,7 +59,7 @@ group "ffmpeg-genbolt-raw" {
      }
 
      resources {
-       cpu    = 500
+       cpu    = 600
        memory = 512
      }
 

@@ -28,21 +28,21 @@ group "ffmpeg-icsee-raw" {
   
     task "ffmpeg-icsee-stream" {
       driver = "raw_exec"
-	    kill_timeout = "5s"
+	  kill_timeout = "5s"
       config {
       command = "/media/cluster/camera/record_camera_with_ffmpeg.sh"
  	     args = [""]
 		
       }
       resources {
-        cpu    = 4000
-        memory = 1024
+        cpu    = 5000
+        memory = 1600
       }
 
       env {
         SOURCE = "rtsp://admin:admin@192.168.30.67:554"
         DEVICE = "iscee"
-        EXTRA_TIME = "60"
+        EXTRA_TIME = "200"
         EXTRA_TIME_HUNG = "360"
         DIR = "/media/srv/videos/cam/"
       }
@@ -59,8 +59,8 @@ group "ffmpeg-icsee-raw" {
      }
 
      resources {
-       cpu    = 500
-       memory = 512
+       cpu    = 600
+       memory = 600
      }
 
       env {
