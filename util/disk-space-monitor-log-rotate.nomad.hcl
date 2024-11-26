@@ -5,10 +5,6 @@ job "pi-disk-space-temp-monitor-log-rotate" {
     attribute = "${attr.kernel.name}"
     value = "linux"
   }
-  constraint {
-    attribute    = "${meta.pi}"
-    set_contains = "true"
- }
   periodic {
       cron = "1 * * * 1"
     }
