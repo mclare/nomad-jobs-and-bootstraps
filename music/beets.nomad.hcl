@@ -26,8 +26,8 @@ job "beets-service" {
         args = ["-c", "crontab /config/to-load.cron; crond; while true; do date; sleep 360; done;"]
       }
       resources {
-        cpu    = 640
-        memory = 1024
+        cpu    = 1000
+        memory = 1536
       }
 
     }
