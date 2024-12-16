@@ -44,30 +44,12 @@ group "ffmpeg-icsee-raw" {
         DEVICE = "iscee"
         EXTRA_TIME = "200"
         EXTRA_TIME_HUNG = "360"
+        CODEC = "mp4"
         DIR = "/media/srv/videos/cam/"
+        SNAPSHOT_OUTPUT_FOLDER = "/media/cluster/common/home-assistant/www"
+        SNAPSHOT_SLEEP_TIME = "10"
       }
    }
-   
-   
-   task "ffmpeg-icsee-snapshot" {
-     driver = "raw_exec"
-     kill_timeout = "5s"
-     config {
-     command = "timeout"
-	   args = ["--kill-after=5", "3720","/media/cluster/camera/ffmpeg-snapshot.sh"]
-	
-     }
 
-     resources {
-       cpu    = 600
-       memory = 600
-     }
-
-      env {
-        SOURCE = "rtsp://admin:admin@192.168.30.67:554"
-        DEVICE = "iscee"
-        SLEEP_TIME = "15"
-      }
-  }
 }
 }

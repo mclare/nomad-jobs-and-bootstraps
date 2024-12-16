@@ -44,30 +44,12 @@ group "ffmpeg-genbolt-raw" {
         DEVICE = "garage"
         EXTRA_TIME = "60"
         EXTRA_TIME_HUNG = "360"
+        CODEC = "mp4"
         DIR = "/media/srv/videos/cam/"
+        SNAPSHOT_OUTPUT_FOLDER = "/media/cluster/common/home-assistant/www"
+        SNAPSHOT_SLEEP_TIME = "10"
       }
    }
-   
-   
-   task "ffmpeg-genbolt-snapshot" {
-     driver = "raw_exec"
-     kill_timeout = "5s"
-     config {
-     command = "timeout"
-	   args = ["--kill-after=5", "3720","/media/cluster/camera/ffmpeg-snapshot.sh"]
-	
-     }
-
-     resources {
-       cpu    = 600
-       memory = 512
-     }
-
-      env {
-        SOURCE = "rtsp://@192.168.30.112:554/11"
-        DEVICE = "garage"
-        SLEEP_TIME = "15"
-      }
-  }
+  
 }
 }
