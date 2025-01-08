@@ -46,7 +46,7 @@ job "pihole" {
 		FTLCONF_dns_upstreams = "9.9.9.11;149.112.112.11;2620:fe::11;2620:fe::fe:11"
 
 		QUERY_LOGGING = "false"
-  	    FRIENDLY_NAME = "PiHole-server-Nomad"
+  	    FRIENDLY_NAME = "PiHole-${NOMAD_HOST_IP_dns}"
 	    TZ = "America/Toronto"
 		DNSSEC = "true"
 		DHCP_IPv6 = "false"
@@ -55,7 +55,7 @@ job "pihole" {
 		FTLCONF_RATE_LIMIT = "0/0"
 		PIHOLE_BASE = "/config/pihole/pihole-storage"
 		BLOCK_ICLOUD_PR = "false"
-		VIRTUAL_HOST = "${NOMAD_IP_client}"
+		VIRTUAL_HOST = "${NOMAD_HOST_IP_dns}"
       }
       
       config {
