@@ -40,13 +40,19 @@ job "pihole" {
       driver = "docker"
 
 	  env {
-        WEBPASSWORD = "<password>"
 
+		# Upstream DNS 2024.07.0 PIHOLE_DNS_ 2025+ is FTLCONF_dns_upstreams
+		PIHOLE_DNS_ = "9.9.9.11;149.112.112.11;2620:fe::11;2620:fe::fe:11"
+		FTLCONF_dns_upstreams = "9.9.9.11;149.112.112.11;2620:fe::11;2620:fe::fe:11"
+
+		QUERY_LOGGING = "false"
   	    FRIENDLY_NAME = "PiHole-server-Nomad"
 	    TZ = "America/Toronto"
 		DNSSEC = "true"
 		DHCP_IPv6 = "false"
 		DNSMASQ_LISTENING = "all"
+		# Control FTL's query rate-limiting. Rate-limited queries are answered with a REFUSED reply and not further processed by FTL About per-client rate limiting https://docs.pi-hole.net/ftldns/configfile/#rate_limit
+		FTLCONF_RATE_LIMIT = "0/0"
 		PIHOLE_BASE = "/config/pihole/pihole-storage"
 		BLOCK_ICLOUD_PR = "false"
 		VIRTUAL_HOST = "${NOMAD_IP_client}"
@@ -55,10 +61,14 @@ job "pihole" {
       config {
 		  image = "pihole/pihole"
 	      ports = ["dns","dns-IOT","dns-kids","http"]
-		  volumes  = ["/media/cluster/config/pihole/docker/pihole/:/etc/pihole/","/media/cluster/config/pihole/docker/dnsmasq.d/:/etc/dnsmasq.d/"] #Nomad client must have docker.volumes.enabled = true https://developer.hashicorp.com/nomad/docs/drivers/docker#client-requirements
+		 # Removing for performance and universality reasons. Now relying on OrbitalSync to sync settings from primary  https://github.com/mattwebbio/orbital-sync.  
+		 # volumes  = ["/media/cluster/config/pihole/docker/pihole/:/etc/pihole/","/media/cluster/config/pihole/docker/dnsmasq.d/:/etc/dnsmasq.d/"] #Nomad client must have docker.volumes.enabled = true https://developer.hashicorp.com/nomad/docs/drivers/docker#client-requirements
 		  cap_add = ["net_admin", "setfcap"]
       }
-
+	  resources {
+		cpu    = 500
+		memory = 500
+      }
     }
   }
 }
