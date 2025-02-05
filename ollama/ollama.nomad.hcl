@@ -42,8 +42,8 @@ job "ollama" {
       }
 
       resources {
-        cpu    = 4400  # 4 vCPUs
-        memory = 7200
+        cpu    = 7400  # 4 vCPUs
+        memory = 7400
       }
 
       service {
@@ -68,8 +68,8 @@ env {
        }
 
       resources {
-        cpu    = 500
-	      memory = 500
+        cpu    = 300
+	      memory = 300
       }
 
     }
