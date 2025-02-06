@@ -64,15 +64,26 @@ job "ollama" {
       }
     }
 
-    task "python-for-ollama" {
+     task "python-for-ollama" {
       driver = "docker"
       
+      template {
+        data = <<EOF
+#!/bin/sh
+pip install ollama
+exec python3
+EOF
+        destination = "local/setup.sh"
+        perms = "755"
+      }
+
       config {
         image = "python"
         interactive = true
         volumes = [
           "/media/cluster/common/ollama/:/config/"
         ]
+        entrypoint = ["/local/setup.sh"]
       }
       
       template {
