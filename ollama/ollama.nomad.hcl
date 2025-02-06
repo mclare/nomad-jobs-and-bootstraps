@@ -34,7 +34,7 @@ job "ollama" {
       
       volume_mount {
         volume      = "ollama-models"
-        destination = "/root/.ollama/models"
+        destination = "/root/.ollama"
       }
       
       config {
