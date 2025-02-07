@@ -46,8 +46,8 @@ job "ollama" {
       }
       
       resources {
-        cpu    = 7400
-        memory = 7400
+        cpu    = 7600
+        memory = 7600
       }
       
       service {
@@ -96,7 +96,7 @@ EOH
       
       resources {
         cpu    = 300
-        memory = 300
+        memory = 200
       }
     }
   }
