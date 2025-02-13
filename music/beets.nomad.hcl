@@ -23,7 +23,7 @@ job "beets-service" {
         ports = ["http"]
         volumes  = ["/media/music/:/music/","/media/cluster/config/beets/:/config/","/media/cluster/common/beets-ingest/:/download/"]
         command = "sh"
-        args = ["-c", "crontab /config/to-load.cron; crond; while true; do date; sleep 360; done;"]
+        args = ["-c", "crontab /config/crontab.txt; crond; while true; do date; sleep 360; done;"]
       }
       resources {
         cpu    = 1000
