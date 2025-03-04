@@ -13,7 +13,7 @@ job "python-simplemonitor" {
       driver = "docker"
       
       config {
-        image = "python:3.8"
+        image = "python"
         privileged = true
         interactive = true
 
