@@ -1,6 +1,10 @@
 /*
 Created Sunday January 7, 2024
+But Orbital Sync is no longer supported by the author.
 https://github.com/mattwebbio/orbital-sync
+
+Transitioning to Nebula Sync
+https://github.com/lovelaze/nebula-sync
 */
 
 job "pihole-orbital-sync" {
