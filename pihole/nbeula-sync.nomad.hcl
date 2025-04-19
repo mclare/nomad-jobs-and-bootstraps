@@ -17,7 +17,8 @@ job "pihole-nebula-sync" {
         PRIMARY = "http://192.168.10.5/|password"
         REPLICAS = "http://192.168.40.12:8053/|password"
         FULL_SYNC=true
-        CRON = "5 * * * *"
+        CRON = "5 */4 * * *"
+      	RUN_GRAVITY=true 
       }
       
       config {
