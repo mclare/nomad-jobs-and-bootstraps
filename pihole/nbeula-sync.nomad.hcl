@@ -18,7 +18,8 @@ job "pihole-nebula-sync" {
         REPLICAS = "http://192.168.40.12:8053/|password"
         FULL_SYNC=true
         CRON = "5 */4 * * *"
-      	RUN_GRAVITY=true 
+        #Bug with nebula-sync, it doesn't work with the gravity updating and the docker version?
+      	RUN_GRAVITY=false 
       }
       
       config {

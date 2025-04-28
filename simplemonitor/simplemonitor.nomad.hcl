@@ -2,11 +2,6 @@ job "python-simplemonitor" {
   datacenters = ["dc1"]
   type        = "service"
 
-    constraint {
-    attribute = "${attr.unique.network.ip-address}"
-    value     = "192.168.40.10"
-  }
-
   group "python-simplemonitor" {
 	
     task "python-simplemonitor" {
