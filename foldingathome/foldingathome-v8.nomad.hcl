@@ -23,14 +23,8 @@ job "folding-v8" {
       driver = "docker"
 
       env {
-        
-        /* Legacy v7, but good to have around */
-		FOLD_USER = "Matt_Clare"
-		FOLD_TEAM = "47936"
-        FOLD_ANON = "false"
         FOLD_ALLOW_IP = "192.168.10.1/14"
-        POWER = "light"
-        ACCOUNT_TOKEN = "_JXOi_JW4Tqs14TqcGP1FcGPjkPDajkOdibyVdibo_c"
+        ACCOUNT_TOKEN = "wSBj6wSBm8Y0gm8Yx33bTx33EiKriEiLQzyEAQz96a4"
         MACHINE_NAME = "Cluster Folding@Home"
 
       }
@@ -42,7 +36,7 @@ job "folding-v8" {
       }
 
       resources {
-        cpu    = 3200
+        cpu    = 4200
 		    memory = 400
       }
     }
