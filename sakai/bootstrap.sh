@@ -254,6 +254,11 @@ log "Building and deploying Sakai to Tomcat..."
 # Create sakai.properties
 # --------------------------------------------------
 mkdir -p "${SAKAI_HOME}"
+mkdir -p "${SAKAI_HOME}/archive" # For site archive imports
+chmod 777 "${SAKAI_HOME}/archive"
+mkdir -p "${SAKAI_HOME}/content"
+chmod 777 "${SAKAI_HOME}/content"
+
 log "Writing to ${SAKAI_HOME}/sakai.properties..."
 cat <<EOF > ${SAKAI_HOME}/sakai.properties                                                                          
 # Minimal Sakai config
@@ -273,6 +278,7 @@ vendor@org.sakaiproject.db.api.SqlService=mysql
 driverClassName@javax.sql.BaseDataSource=org.mariadb.jdbc.Driver
 hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
 url@javax.sql.BaseDataSource=jdbc:mysql://127.0.0.1:3306/sakai?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+# url@javax.sql.BaseDataSource=jdbc:mysql://127.0.0.1:3306/sakai?useUnicode=true&characterEncoding=UTF-8&useSSL=false&useServerPrepStmts=false
 validationQuery@javax.sql.BaseDataSource=select 1 from DUAL
 defaultTransactionIsolationString@javax.sql.BaseDataSource=TRAN
 
@@ -287,9 +293,23 @@ portal.cdn.version=local
 content.virus.scan.enabled=false
 virusScan.enabled=false
 
-
 #enable search, set to false to disable (true is the default setting)
 search.enable=false
+
+
+#store content in the file system instead of the database
+convertToFile@org.sakaiproject.content.api.ContentHostingService=true
+content.factory=org.sakaiproject.content.impl.FileSystemContentHostingService
+#content.store=resources
+content.store=file
+content.repository=${SAKAI_HOME}/content
+
+# Increase upload limits (MB)
+content.upload.max=4096
+content.upload.siteImport.max=4096
+siteinfo.import.max=4096
+
+
 EOF
 
 # --------------------------------------------------
@@ -319,6 +339,9 @@ echo "==========================================================================
 echo "[bootstrap] Setup completed successfully!"
 echo "Starting Sakai..."
 echo "Portal URL (once started): http://localhost:8080/portal"
+echo "Admin credentials (default): admin / admin"
+echo "Archives need to unzipped in to ${SAKAI_HOME}/archive for import via Site Archive"
+echo "tool to be able to import them into a site."
 echo "==============================================================================="
 echo "================================================================================="
 echo "[bootstrap] COMPLETED SUCCESSFULLY"
@@ -332,4 +355,4 @@ if [ "${IS_CONTAINER}" -eq 1 ]; then
   echo "Starting Sakai:"
   cd ${TOMCAT_DIR}/bin ; ./startup.sh && tail -f ../logs/catalina.out
 fi
-==============================================================================="
+echo "==============================================================================="
