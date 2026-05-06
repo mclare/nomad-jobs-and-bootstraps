@@ -33,7 +33,7 @@ job "vnc-firefox-alpine" {
 
       env {
         VNC_USER        = "nomaduser"
-        USER_PASS       = ""
+        USER_PASS       = "clusterpassword123"
         VNC_SERVER_PASS = ""
         DISPLAY         = ":1"
       }

@@ -43,7 +43,8 @@ job "pihole" {
 
 		# Upstream DNS 2024.07.0 PIHOLE_DNS_ 2025+ is FTLCONF_dns_upstreams
 		PIHOLE_DNS_ = "9.9.9.11;149.112.112.11;2620:fe::11;2620:fe::fe:11"
-		FTLCONF_dns_upstreams = "9.9.9.11;149.112.112.11;2620:fe::11;2620:fe::fe:11"
+		FTLCONF_dns_upstreams = "9.9.9.11;149.112.112.11;9.9.9.9;149.112.112.112;2620:fe::fe;2620:fe::9;9.9.9.11;149.112.112.11;2620:fe::11;2620:fe::fe:11;1.0.0.1;1.1.1.1"
+
 
 		QUERY_LOGGING = "false"
   	    FRIENDLY_NAME = "PiHole-${NOMAD_HOST_IP_dns}"
