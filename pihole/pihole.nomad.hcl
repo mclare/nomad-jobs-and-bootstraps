@@ -51,7 +51,7 @@ job "pihole" {
 	    TZ = "America/Toronto"
 		DNSSEC = "true"
 		DHCP_IPv6 = "false"
-		DNSMASQ_LISTENING = "all"
+		FTLCONF_dns_listeningMode = ALL'
 		# Control FTL's query rate-limiting. Rate-limited queries are answered with a REFUSED reply and not further processed by FTL About per-client rate limiting https://docs.pi-hole.net/ftldns/configfile/#rate_limit
 		FTLCONF_RATE_LIMIT = "0/0"
 		PIHOLE_BASE = "/config/pihole/pihole-storage"
