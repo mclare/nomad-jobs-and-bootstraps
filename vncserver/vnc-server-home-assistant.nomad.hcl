@@ -16,8 +16,7 @@ job "vnc-firefox-alpine" {
         static = 5901
       }
     }
-
-    task "vnc-server" {
+task "vnc-server" {
       driver = "docker"
 
       config {
@@ -31,11 +30,20 @@ job "vnc-firefox-alpine" {
         ports   = ["vnc"]
       }
 
+      # ONLY non-sensitive variables go here
       env {
-        VNC_USER        = "nomaduser"
-        USER_PASS       = "clusterpassword123"
-        VNC_SERVER_PASS = ""
-        DISPLAY         = ":1"
+        VNC_USER = "nomaduser"
+        DISPLAY  = ":1"
+      }
+
+      # BOTH passwords get securely injected here
+      template {
+        data = <<EOH
+USER_PASS="{{ with nomadVar "nomad/jobs/vnc-firefox-alpine" }}{{ .vnc_user_pass }}{{ end }}"
+VNC_SERVER_PASS="{{ with nomadVar "nomad/jobs/vnc-firefox-alpine" }}{{ .vnc_user_pass }}{{ end }}"
+EOH
+        destination = "secrets/vnc.env"
+        env         = true
       }
 
       resources {
@@ -44,4 +52,4 @@ job "vnc-firefox-alpine" {
       }
     }
   }
-}
+} 
