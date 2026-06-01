@@ -1,19 +1,8 @@
-/* Woah - this was tricky
-
-Needs the proxy image to exist the docker/VPN into local network 
-Also needs a CNAME or other entry in local DNS for transmission in order for transmission-openvpn-proxy to start.
-
- */
 
 job "transmission-openvpn" {
   datacenters = ["dc1"]
   type        = "service"
-  
-/*constraint {
-  attribute = "${attr.unique.network.ip-address}"
-  value     = "192.168.40.12"
-}*/
-  
+
 constraint {
   attribute = "${attr.unique.hostname}"
   value     = "pi4B-02"
