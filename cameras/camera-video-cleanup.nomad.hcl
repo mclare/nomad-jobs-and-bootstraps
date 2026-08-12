@@ -35,7 +35,7 @@ echo "$(date +'%Y-%m-%d %H:%M:%S') - Starting camera video cleanup process"
 # 1. Move old video folders to "to_be_deleted" after MOVE_AFTER_DAYS
 echo "Moving folders older than $${MOVE_AFTER_DAYS} days from $SOURCE_DIR to $TO_BE_DELETED_DIR"
 find "$SOURCE_DIR" -mindepth 1 \
-  \( -name "kuna" -o -name "cam_to_be_deleted" \) -prune -o \
+  \( -name "cam_to_be_deleted" \) -prune -o \
   \( -name "activity" -o -name "@eaDir" \) -o \
   -type d -mtime +$${MOVE_AFTER_DAYS} -prune -exec bash -c '
     for dir; do
