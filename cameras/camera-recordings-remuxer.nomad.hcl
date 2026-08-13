@@ -15,7 +15,7 @@ job "camera-recordings-remuxer" {
 #!/bin/bash
 
 # Configuration
-WATCH_DIR="/media/srv/videos/cam/activity"
+WATCH_DIR="/media/srv/videos/cam" # Directory to watch for .265 files
 FPS="15" # Adjust this if playback is too fast or slow
 
 echo "Starting Genbolt H.265 to MP4 remuxer..."
