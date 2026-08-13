@@ -20,7 +20,7 @@ job "camera-ftp" {
         
         # Binding the host directory to the container's FTP directory
         volumes = [
-          "/media/srv/videos/cam/activity/:/ftp/genbolt"
+          "/media/srv/videos/cam/:/ftp/genbolt"
         ]
       }
 
