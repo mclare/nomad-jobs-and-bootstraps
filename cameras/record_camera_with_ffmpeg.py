@@ -71,7 +71,8 @@ def detect_codec(sample_segment_path):
             str(sample_segment_path)
         ]
         res = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        return res.stdout.strip().lower()
+        tokens = res.stdout.strip().split()
+        return tokens[0].lower() if tokens else None
     except Exception as e:
         print(f"⚠️ ffprobe codec detection failed: {e}")
         return None
@@ -144,30 +145,51 @@ try:
         if not tag_v:
             detected_codec = detect_codec(segments[0])
             print(f"🔍 Detected video stream codec: {detected_codec}")
-            if detected_codec in ["hevc", "h265"]:
+            if detected_codec and any(c in detected_codec for c in ["hevc", "h265"]):
                 tag_v = "hvc1"
 
-        print("📦 Merging segments into final MP4...")
+        print("📦 Merging segments into final MP4 file...")
+
         merge_cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
             "-f", "concat", "-safe", "0", "-i", str(concat_list),
-            "-c", "copy"
+
+            # Keep the HEVC video untouched.
+            "-map", "0:v:0",
+            "-c:v", "copy",
+
+            # Re-encode camera's 8 kHz AAC to a more
+            # QuickTime-compatible AAC-LC stream.
+            "-map", "0:a:0?",
+            "-c:a", "aac",
+            "-ar", "48000",
+            "-ac", "1",
+            "-b:a", "64k",
         ]
 
         if tag_v:
             print(f"🏷️ Applying video tag: -tag:v {tag_v}")
             merge_cmd.extend(["-tag:v", tag_v])
 
-        merge_cmd.extend(["-movflags", "+faststart", str(local_temp_file)])
+        merge_cmd.extend([
+            "-movflags", "+faststart",
+            str(local_temp_file)
+        ])
+
+        print("🎬 Video: stream copy")
+        print("🎵 Audio: AAC 48 kHz mono @ 64 kbps")
 
         res = subprocess.run(merge_cmd)
-        
+
         if res.returncode == 0 and local_temp_file.exists():
             print(f"Copying {local_temp_file} to {destination_file}...")
             shutil.copy2(local_temp_file, destination_file)
             print("Done")
         else:
-            print(f"❌ Error: FFmpeg failed to merge segments (exit code {res.returncode}).")
+            print(
+                f"❌ Error: FFmpeg failed to merge segments "
+                f"(exit code {res.returncode})."
+            )
     else:
         print("⚠️ No recording segments were created.")
 
