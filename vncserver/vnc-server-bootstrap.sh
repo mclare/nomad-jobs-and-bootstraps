@@ -9,7 +9,7 @@ echo "Starting Alpine VNC Bootstrap"
 # 1. System Setup
 echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/community" >> /etc/apk/repositories
 apk update
-apk add --no-cache bash tigervnc xfce4 xfce4-terminal firefox dbus dbus-x11
+apk add --no-cache sudo bash tigervnc xfce4 xfce4-terminal firefox dbus dbus-x11
 
 # ttf-dejavu adwaita-icon-theme
 # 2. Create the Nomad User
